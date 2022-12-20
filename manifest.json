@@ -1,0 +1,39 @@
+{
+  "name": "Shortcut for abceed",
+  "description": "enable to use some shortcut keys on abceed web",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "push-back-button": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Left",
+        "mac": "Command+Shift+Left"
+      },
+      "description": "push back button"
+    },
+    "toggle-play-button": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space",
+        "mac": "Command+Shift+Space"
+      },
+      "description": "toggle play button"
+    },
+    "push-forward-button": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Right",
+        "mac": "Command+Shift+Right"
+      },
+      "description": "push forward button"
+    }
+  },
+  "permissions": [
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://app.abceed.com/*/**"
+  ]
+}
