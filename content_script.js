@@ -5,6 +5,15 @@ document.addEventListener('keydown', (event) => {
   if (keysPressed['Shift']) {
     switch (event.code) {
       case 'ArrowLeft':
+        clickPrevCommentaryLink()
+        break
+      case 'ArrowRight':
+        clickNextCommentaryLink()
+        break
+    }
+  } else {
+    switch (event.code) {
+      case 'ArrowLeft':
         clickSoundControllerButton(1)
         break
       case 'ArrowRight':
@@ -18,15 +27,6 @@ document.addEventListener('keydown', (event) => {
         break
       case 'Space':
         clickSoundControllerButton(2)
-        break
-    }
-  } else {
-    switch (event.code) {
-      case 'ArrowLeft':
-        clickPrevCommentaryLink()
-        break
-      case 'ArrowRight':
-        clickNextCommentaryLink()
         break
     }
   }
