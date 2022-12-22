@@ -1,4 +1,7 @@
-let keysPressed = {}
+interface PressedKeyStatus {
+  [key: string]: boolean;
+}
+let keysPressed: PressedKeyStatus = {}
 document.addEventListener('keydown', (event) => {
   keysPressed[event.key] = true
 
@@ -36,16 +39,18 @@ document.addEventListener('keyup', (event) => {
   delete keysPressed[event.key]
 })
 
-function clickSoundControllerButton(index) {
-  const els = document.getElementsByClassName('sound-controller_item')
-  els[index].click()
+function clickSoundControllerButton(index: number) {
+  const el = document.getElementsByClassName('sound-controller_item')[index]
+  if (el) (el as HTMLElement).click()
 }
 
-function changeVoiceSpeedSelectBox(diff) {
-  const currentSpeed = document.getElementsByClassName('current-rate')[0].innerText
-  const selectEl = document.querySelector('select.playback-rate_select')
+function changeVoiceSpeedSelectBox(diff: number) {
+  const selectEl = document.querySelector('select.playback-rate_select') as HTMLSelectElement
   const options = selectEl.options
+  const currentSpeed = (document.getElementsByClassName('current-rate')[0] as HTMLElement).innerText
   const currentIndex = Array.from(options).findIndex(option => Number.parseFloat(option.value) === Number.parseFloat(currentSpeed.replace('×', '')))
+  if (currentIndex < 0) return
+
   const newIndex = currentIndex + diff
   if (newIndex >= 0 && newIndex <= options.length - 1) {
     selectEl.selectedIndex = newIndex
@@ -56,10 +61,10 @@ function changeVoiceSpeedSelectBox(diff) {
 
 function clickNextCommentaryLink() {
   const el = document.querySelector('.commentary-nav-next')
-  if (el) el.click()
+  if (el) (el as HTMLElement).click()
 }
 
 function clickPrevCommentaryLink() {
   const el = document.querySelector('.commentary-nav-prev')
-  if (el) el.click()
+  if (el) (el as HTMLElement).click()
 }
