@@ -5,10 +5,10 @@ document.addEventListener('keydown', (event) => {
   if (keysPressed['Shift']) {
     switch (event.code) {
       case 'ArrowLeft':
-        pushSoundControllerButton(1)
+        clickSoundControllerButton(1)
         break
       case 'ArrowRight':
-        pushSoundControllerButton(3)
+        clickSoundControllerButton(3)
         break
       case 'ArrowUp':
         changeVoiceSpeedSelectBox(-1)
@@ -17,7 +17,16 @@ document.addEventListener('keydown', (event) => {
         changeVoiceSpeedSelectBox(1)
         break
       case 'Space':
-        pushSoundControllerButton(2)
+        clickSoundControllerButton(2)
+        break
+    }
+  } else {
+    switch (event.code) {
+      case 'ArrowLeft':
+        clickPrevCommentaryLink()
+        break
+      case 'ArrowRight':
+        clickNextCommentaryLink()
         break
     }
   }
@@ -27,7 +36,7 @@ document.addEventListener('keyup', (event) => {
   delete keysPressed[event.key]
 })
 
-function pushSoundControllerButton(index) {
+function clickSoundControllerButton(index) {
   const els = document.getElementsByClassName('sound-controller_item')
   els[index].click()
 }
@@ -42,4 +51,15 @@ function changeVoiceSpeedSelectBox(diff) {
     selectEl.selectedIndex = newIndex
     selectEl.dispatchEvent(new Event('change'))
   }
+}
+
+
+function clickNextCommentaryLink() {
+  const el = document.querySelector('.commentary-nav-next')
+  if (el) el.click()
+}
+
+function clickPrevCommentaryLink() {
+  const el = document.querySelector('.commentary-nav-prev')
+  if (el) el.click()
 }
