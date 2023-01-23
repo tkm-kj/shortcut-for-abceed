@@ -5,10 +5,10 @@ document.addEventListener('keydown', (event) => {
     if (keysPressed['Shift']) {
         switch (event.code) {
             case 'ArrowLeft':
-                clickPrevCommentaryLink();
+                clickSoundControllerButton(0)
                 break;
             case 'ArrowRight':
-                clickNextCommentaryLink();
+                clickSoundControllerButton(4)
                 break;
         }
     }
