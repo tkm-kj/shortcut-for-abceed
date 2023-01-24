@@ -12,6 +12,16 @@ document.addEventListener('keydown', (event) => {
                 break;
         }
     }
+    else if (keysPressed['Alt']) {
+        switch (event.code) {
+            case 'ArrowLeft':
+                clickSoundControllerButton(0);
+                break;
+            case 'ArrowRight':
+                clickSoundControllerButton(4);
+                break;
+        }
+    }
     else {
         switch (event.code) {
             case 'ArrowLeft':
