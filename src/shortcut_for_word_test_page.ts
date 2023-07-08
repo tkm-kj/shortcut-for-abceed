@@ -10,7 +10,6 @@ export const handleKeyDownEventForWordTestPage = (event: KeyboardEvent) => {
       clickComentaryButton();
       break
     case 'Space':
-      console.log('clickPlaybackButton')
       clickPlaybackButton();
       break;
   }
