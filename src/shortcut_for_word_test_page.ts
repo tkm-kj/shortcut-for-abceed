@@ -1,3 +1,5 @@
+import  { clickBackButton } from './common_element';
+
 export const handleKeyDownEventForWordTestPage = (event: KeyboardEvent) => {
   switch (event.code) {
     case 'ArrowRight':
@@ -11,6 +13,9 @@ export const handleKeyDownEventForWordTestPage = (event: KeyboardEvent) => {
       break
     case 'Space':
       clickPlaybackButton();
+      break;
+    case 'Escape':
+      clickBackButton();
       break;
   }
 }
