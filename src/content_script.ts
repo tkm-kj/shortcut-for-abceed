@@ -8,14 +8,17 @@ function main() {
       handleKeyDownEventForWordTestPage(event)
     } else if (url.startsWith('https://app.abceed.com/books/study')) {
       handleKeyDownEventForExplanationPage(event);
+      // to prevent default implemented shortcut behavior of abceed
+      event.stopPropagation();
     }
-  })
+
+  }, { capture: true })
   document.addEventListener('keyup', (event) => {
     const url = window.location.href;
     if (url.startsWith('https://app.abceed.com/books/study')) {
       handleKeyUpEventForExplanationPage(event)
     }
-  });
+  }, { capture: true });
 }
 
 main()
