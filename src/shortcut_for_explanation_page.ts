@@ -1,3 +1,5 @@
+import { clickBackButton } from './common_element';
+
 interface PressedKeyStatus {
   [key: string]: boolean;
 }
@@ -40,6 +42,9 @@ export const handleKeyDownEventForExplanationPage = (event: KeyboardEvent) => {
         break;
       case 'Space':
         clickSoundControllerButton(2);
+        break;
+      case 'Escape':
+        clickBackButton();
         break;
     }
   }
