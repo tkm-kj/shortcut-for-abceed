@@ -9,7 +9,7 @@ function main() {
       handleKeyDownEventForWordTestPage(event)
     } else if (url.startsWith('https://app.abceed.com/books/study/results')) {
       handleKeyDownEventForResultPage(event)
-    } else if (url.startsWith('https://app.abceed.com/books/study')) {
+    } else {
       handleKeyDownEventForExplanationPage(event);
       // to prevent default implemented shortcut behavior of abceed
       event.stopPropagation();
@@ -18,8 +18,12 @@ function main() {
   }, { capture: true })
   document.addEventListener('keyup', (event) => {
     const url = window.location.href;
-    if (url.startsWith('https://app.abceed.com/books/study')) {
-      handleKeyUpEventForExplanationPage(event)
+    if (/^https:\/\/app\.abceed\.com\/.*\/word-test\/.*$/.test(url)) {
+      // noop
+    } else if (url.startsWith('https://app.abceed.com/books/study/results')) {
+      // noop
+    } else {
+      handleKeyUpEventForExplanationPage(event);
     }
   }, { capture: true });
 }
