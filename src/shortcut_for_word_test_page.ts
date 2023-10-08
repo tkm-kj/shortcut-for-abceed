@@ -1,41 +1,41 @@
-import  { clickBackButton } from './common_element';
+import { clickBackButton } from './common_element'
 
-export const handleKeyDownEventForWordTestPage = (event: KeyboardEvent) => {
+export const handleKeyDownEventForWordTestPage = (event: KeyboardEvent): void => {
   switch (event.code) {
     case 'ArrowRight':
-      clickKnownButton();
-      break;
+      clickKnownButton()
+      break
     case 'ArrowLeft':
-      clickUnknownButton();
-      break;
+      clickUnknownButton()
+      break
     case 'ArrowUp':
-      clickComentaryButton();
+      clickComentaryButton()
       break
     case 'Space':
-      clickPlaybackButton();
-      break;
+      clickPlaybackButton()
+      break
     case 'Escape':
-      clickBackButton();
-      break;
+      clickBackButton()
+      break
   }
 }
 
-const clickKnownButton = () => {
-  const el = document.querySelector('.is-known');
-  if (el) (el as HTMLElement).click();
-};
+const clickKnownButton = (): void => {
+  const el = document.querySelector('.is-known')
+  if (el !== null) (el as HTMLElement).click()
+}
 
-const clickUnknownButton = () => {
-  const el = document.querySelector('.is-unknown');
-  if (el) (el as HTMLElement).click();
-};
+const clickUnknownButton = (): void => {
+  const el = document.querySelector('.is-unknown')
+  if (el !== null) (el as HTMLElement).click()
+}
 
-const clickComentaryButton = () => {
-  const el = document.querySelector('.score-button-component');
-  if (el) (el as HTMLElement).click();
-};
+const clickComentaryButton = (): void => {
+  const el = document.querySelector('.score-button-component')
+  if (el !== null) (el as HTMLElement).click()
+}
 
-const clickPlaybackButton = () => {
-  const el = document.querySelector('.speaker-button-component');
-  if (el) (el as HTMLElement).click();
-};
+const clickPlaybackButton = (): void => {
+  const el = document.querySelector('.speaker-button-component')
+  if (el !== null) (el as HTMLElement).click()
+}
