@@ -1,84 +1,89 @@
-import { clickBackButton } from './common_element';
+import { clickBackButton } from './common_element'
 
-interface PressedKeyStatus {
-  [key: string]: boolean;
-}
-let keysPressed: PressedKeyStatus = {}
+const pressedKeyMap = new Map<string, boolean>()
 
-export const handleKeyDownEventForExplanationPage = (event: KeyboardEvent) => {
-  keysPressed[event.key] = true;
+export const handleKeyDownEventForExplanationPage = (event: KeyboardEvent): void => {
+  pressedKeyMap.set(event.key, true)
 
-  if (keysPressed['Shift']) {
+  if (pressedKeyMap.get('Shift') !== undefined) {
     switch (event.code) {
       case 'ArrowLeft':
-        clickPrevCommentaryLink();
-        break;
+        clickPrevCommentaryLink()
+        break
       case 'ArrowRight':
-        clickNextCommentaryLink();
-        break;
+        clickNextCommentaryLink()
+        break
     }
-  } else if (keysPressed['Alt']) {
+  } else if (pressedKeyMap.get('Alt') !== undefined) {
     switch (event.code) {
       case 'ArrowLeft':
-        clickSoundControllerButton(0);
-        break;
+        clickSoundControllerButton(0)
+        break
       case 'ArrowRight':
-        clickSoundControllerButton(4);
-        break;
+        clickSoundControllerButton(4)
+        break
     }
   } else {
     switch (event.code) {
       case 'ArrowLeft':
-        clickSoundControllerButton(1);
-        break;
+        clickSoundControllerButton(1)
+        break
       case 'ArrowRight':
-        clickSoundControllerButton(3);
-        break;
+        clickSoundControllerButton(3)
+        break
       case 'ArrowUp':
-        changeVoiceSpeedSelectBox(-1);
-        break;
+        changeVoiceSpeedSelectBox(-1)
+        break
       case 'ArrowDown':
-        changeVoiceSpeedSelectBox(1);
-        break;
+        changeVoiceSpeedSelectBox(1)
+        break
       case 'Space':
-        clickSoundControllerButton(2);
-        break;
+        clickSoundControllerButton(2)
+        break
       case 'Escape':
-        clickBackButton();
-        break;
+        clickBackButton()
+        break
     }
   }
 }
 
-export const handleKeyUpEventForExplanationPage = (event: KeyboardEvent) => {
-  delete keysPressed[event.key];
+export const handleKeyUpEventForExplanationPage = (event: KeyboardEvent): void => {
+  pressedKeyMap.delete(event.key)
 }
 
-const clickSoundControllerButton = (index: number) => {
-  const el = document.getElementsByClassName('sound-controller_item')[index];
-  if (el) (el as HTMLElement).click();
+const clickSoundControllerButton = (index: number): void => {
+  (document.getElementsByClassName('sound-controller_item')[index] as HTMLElement).click()
 }
 
-const changeVoiceSpeedSelectBox = (diff: number) => {
-  const selectEl = document.querySelector('select.playback-rate_select') as HTMLSelectElement;
-  const options = selectEl.options;
-  const currentSpeed = (document.getElementsByClassName('current-rate')[0] as HTMLElement).innerText;
-  const currentIndex = Array.from(options).findIndex(option => Number.parseFloat(option.value) === Number.parseFloat(currentSpeed.replace('×', '')));
-  if (currentIndex < 0) return;
+const changeVoiceSpeedSelectBox = (diff: number): void => {
+  const selectEl = document.querySelector('select.playback-rate_select')
+  if (selectEl === null) return
 
-  const newIndex = currentIndex + diff;
+  const foundSelectEl = selectEl as HTMLSelectElement
+  const options = foundSelectEl.options
+  const currentSpeed = (
+    document.getElementsByClassName('current-rate')[0] as HTMLElement
+  ).innerText
+  const currentIndex = Array.from(options).findIndex(
+    (option) =>
+      Number.parseFloat(option.value) ===
+      Number.parseFloat(currentSpeed.replace('×', ''))
+  )
+  if (currentIndex < 0) return
+
+  const newIndex = currentIndex + diff
   if (newIndex >= 0 && newIndex <= options.length - 1) {
-    selectEl.selectedIndex = newIndex;
-    selectEl.dispatchEvent(new Event('change'));
+    foundSelectEl.selectedIndex = newIndex
+    foundSelectEl.dispatchEvent(new Event('change'))
   }
 }
 
-const clickNextCommentaryLink = () => {
-  const el = document.querySelector('.commentary-nav-next');
-  if (el) (el as HTMLElement).click();
+const clickNextCommentaryLink = (): void => {
+  const el = document.querySelector('.commentary-nav-next')
+  if (el !== null) (el as HTMLElement).click()
 }
 
-const clickPrevCommentaryLink = () => {
-  const el = document.querySelector('.commentary-nav-prev');
-  if (el) (el as HTMLElement).click();
+const clickPrevCommentaryLink = (): void => {
+  const el = document.querySelector('.commentary-nav-prev')
+  if (el !== null) (el as HTMLElement).click()
 }
